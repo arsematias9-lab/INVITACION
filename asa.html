@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sorpresa</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#ffdde1;
+font-family:Arial, sans-serif;
+overflow:hidden;
+}
+
+/* SOBRE */
+
+.envelope{
+position:relative;
+width:200px;
+height:130px;
+background:#ff6b81;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:0.5s;
+}
+
+.flap{
+position:absolute;
+top:-65px;
+width:0;
+height:0;
+border-left:100px solid transparent;
+border-right:100px solid transparent;
+border-bottom:65px solid #ff4757;
+transition:0.6s;
+transform-origin:bottom;
+}
+
+.heart{
+position:absolute;
+font-size:30px;
+color:white;
+}
+
+/* CARTA */
+
+.letter{
+position:absolute;
+width:220px;
+height:140px;
+background:white;
+top:10px;
+border-radius:6px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:10px;
+font-size:18px;
+transform:translateY(0);
+transition:0.6s;
+opacity:0;
+}
+
+.open .flap{
+transform:rotateX(180deg);
+}
+
+.open .letter{
+transform:translateY(-120px);
+opacity:1;
+}
+
+/* CORAZONES FLOTANDO */
+
+.floating-heart{
+position:absolute;
+font-size:20px;
+animation:float 4s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-600px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope(this)">
+<div class="flap"></div>
+<div class="heart">❤️</div>
+
+<div class="letter">
+¿Queres comer sanguchitos de miga conmigo? ❤️
+</div>
+
+</div>
+
+<script>
+
+function openEnvelope(el){
+el.classList.add("open");
+createHearts();
+}
+
+function createHearts(){
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.className="floating-heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+}
+}
+
+</script>
+
+</body>
+</html>
